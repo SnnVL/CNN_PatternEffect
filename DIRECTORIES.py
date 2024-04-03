@@ -1,0 +1,6 @@
+MODEL_DIRECTORY = "./saved_models/"
+PREDICTIONS_DIRECTORY = "./saved_predictions/"
+DATA_DIRECTORY = "./data/"
+DIAGNOSTICS_DIRECTORY = "./model_diagnostics/"
+FIGURES_DIRECTORY = "./figures/"
+NETCDF_DIRECTORY = "./saved_netCDF/"
