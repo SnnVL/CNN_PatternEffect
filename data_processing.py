@@ -25,17 +25,6 @@ def get_members(n_train_val_test):
 
     return n_train, n_val, n_test, all_members
 
-def maskout_land_ocean(da, maskout="land"):
-    # if no land mask or ocean masks exists, run make_land_ocean_mask()
-    if maskout == "land":
-        mask = xr.load_dataarray(DATA_DIRECTORY + "MPI-ESM_ocean_mask.nc").to_numpy()
-    elif maskout == "ocean":
-        mask = xr.load_dataarray(DATA_DIRECTORY + "MPI-ESM_land_mask.nc").to_numpy()
-    else:
-        raise NotImplementedError("no such mask type.")
-
-    return da * mask
-
 def get_cmip_data(directory, settings, n_train_val_test, verbose=1):
 
     # DEFINE TRAINING / VALIDATION / TESTING MEMBERS
