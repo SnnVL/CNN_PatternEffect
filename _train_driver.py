@@ -31,7 +31,7 @@ print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 # ---------------------------------------------------------
 
 EXP_NAME_LIST = ( \
-    "MPI_IV", 
+    "MPI_IV_hpt7",  
 )
 OVERWRITE_MODEL = False
 
@@ -84,7 +84,7 @@ for EXP_NAME in EXP_NAME_LIST:
         tf.keras.backend.clear_session()
         # define early stopping callback (cannot be done elsewhere)
         early_stopping = tf.keras.callbacks.EarlyStopping(
-            monitor="val_loss", patience=settings["patience"], verbose=1, mode="auto", restore_best_weights=True
+            monitor="val_loss", patience=10, verbose=1, mode="auto", restore_best_weights=True
         )
 
         model = network.compile_model(x_train, labels_train, settings)

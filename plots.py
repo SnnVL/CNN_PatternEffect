@@ -11,6 +11,13 @@ import cartopy.crs as ccrs
 import cartopy as ct
 import warnings
 import sklearn
+from sklearn import metrics
+
+# Matplotlib colors
+npcols = [
+    '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 
+    '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 
+]
 
 warnings.filterwarnings("ignore")
 mpl.rcParams["figure.facecolor"] = "white"
@@ -64,12 +71,11 @@ def plot_metrics_panels(history, predictions):
 
 def plot_pred_vs_truth(predictions, settings, ms=5, label=''):
 
-    for ivar, var in enumerate(settings["label_vars"]):
-        mse = sklearn.metrics.mean_squared_error(predictions["labels_val"][:, 0], predictions["pred_val"][:, 0])
-        if np.isnan(mse):
-            mse = 0.
-        plt.plot(predictions["labels_val"][:, ivar], predictions["pred_val"][:, ivar], '.', alpha=.5,
-                 label=label + ' (MSE=' + str(mse.round(3)) + ')', markersize=ms)
+    mse = sklearn.metrics.mean_squared_error(predictions["labels_val"], predictions["pred_val"])
+    if np.isnan(mse):
+        mse = 0.
+    plt.plot(predictions["labels_val"], predictions["pred_val"], '.', alpha=.5,
+                label=label + ' (MSE=' + str(mse.round(3)) + ')', markersize=ms)
 
     plt.plot((-10, 10), (-10, 10), '--k', alpha=.5)
     plt.ylim(-8, 3)
@@ -237,3 +243,17 @@ def round_to_n(x,n):
     
 def num_lab(x,n):
     return str(round_to_n(x,n))
+
+def get_area(lat,lon,mask=None):
+    _, Y = np.meshgrid(lon,lat)
+
+    dy = np.deg2rad(np.diff(lat)[0])
+    dx = np.deg2rad(np.diff(lon)[0]) * np.cos(np.deg2rad(Y))
+
+    area = dy * dx
+
+    if mask is not None:
+        area = area * mask
+        area[np.isnan(area)] = 0.
+
+    return area/np.sum(area)
