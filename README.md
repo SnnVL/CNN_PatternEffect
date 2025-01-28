@@ -8,6 +8,8 @@ Convolutional neural networks to predict global-mean radiation from surface temp
 ***
 This code was written in python 3.10.13, tensorflow 2.15.0, tensorflow-probability 0.15.0 and numpy 1.26.4.
 
+The CNNs are trained by running `_train_driver.py`. All experiment settings are contained in `experiment_settings.py`. For plotting and interpreting the results, jupyter notebooks were created.
+
 ## Credits
 
 ***
