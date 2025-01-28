@@ -17,7 +17,7 @@ def get_settings(experiment_name):
         # Green's function
         "MPI_GF": {  
             "input_region": "mask_MPI.nc",
-            "datafolder": "MPI_hist_rcp85/",
+            "datafolder": "hist_rcp85/",
             "detrend": True,
             "anomalies": True,
             "anomalies_years": (0, 30),
