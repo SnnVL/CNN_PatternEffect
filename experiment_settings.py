@@ -38,7 +38,7 @@ def get_settings(experiment_name):
             "n_epochs": 0,
         },
 
-        # MPI CNN used in Rugenstein et al. (2024); Hyperparameter tuning
+        # MPI CNN used in Rugenstein et al. (2024); Hyperparameter tuning; best = MPI_IV_hpt7_s0
         "MPI_IV_hpt0": {
             "input_region": "mask_MPI.nc",
             "detrend": True,
@@ -236,8 +236,7 @@ def get_settings(experiment_name):
             "learning_rate": 0.000005,
             "batch_size": 32,
             "rng_seed": None,
-            # "rng_seed_list": np.arange(5).tolist(),
-            "rng_seed_list": [3,],
+            "rng_seed_list": np.arange(5).tolist(),
             "n_epochs": 25_000,
         },
         "MPI_IV_hpt8": {
